@@ -1,6 +1,6 @@
 variable "repo-name" {
   type    = string
-  default = "psychic-engine"
+  default = "animated-bassoon"
 }
 
 variable "region" {
