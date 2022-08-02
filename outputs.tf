@@ -9,3 +9,7 @@ output "random_pet" {
 output "caller-id" {
   value = module.aws_data.user-info.arn
 }
+
+output "iam-user" {
+    value = module.aws_data.iam-user.names
+}
