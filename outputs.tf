@@ -25,3 +25,10 @@ output "kms-id" {
 output "vpc-id" {
   value = module.vpc.vpc-info.vpc_id
 }
+
+output "iam-assume-role-arn" {
+  value = module.iam-role.assume-role.arn
+}
+/*
+forumla:
+value = module.main_tf_module_name.output_name_from_module_output.desired_value
