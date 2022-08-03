@@ -3,5 +3,5 @@ output "assume-role" {
 }
 
 output "policy" {
-    value = aws_iam_role_policy.eks-policy 
+  value = aws_iam_role_policy.eks-policy
 }

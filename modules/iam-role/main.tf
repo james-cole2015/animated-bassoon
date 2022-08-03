@@ -9,10 +9,10 @@ resource "aws_iam_role" "eks-role" {
     platform    = "terraform"
     environment = "development"
   }
- }
+}
 
 resource "aws_iam_role_policy" "eks-policy" {
-  role = aws_iam_role.eks-role.id
-
+  role   = aws_iam_role.eks-role.id
+  name   = "EKS-Policy"
   policy = file("./modules/iam-role/eks-policy.json")
- }
+}
