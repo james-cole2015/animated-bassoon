@@ -17,7 +17,7 @@ module "eks-module" {
   repo-name  = var.repo-name
   eks-key    = module.kms-key.kms.arn
   vpc_id     = module.vpc.vpc-info.vpc_id
-  subnet_ids = module.vpc.vpc-info.public_subnets
+  subnet_ids = [module.vpc.vpc-info.public_subnets]
 }
 
 module "iam-role" {
