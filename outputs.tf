@@ -32,3 +32,4 @@ output "iam-assume-role-arn" {
 /*
 forumla:
 value = module.main_tf_module_name.output_name_from_module_output.desired_value
+*/
