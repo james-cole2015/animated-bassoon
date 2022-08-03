@@ -11,5 +11,5 @@ output "caller-id" {
 }
 
 output "iam-user" {
-    value = module.aws_data.iam-user.names
+  value = module.aws_data.iam-user.names
 }
