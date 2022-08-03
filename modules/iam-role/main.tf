@@ -9,8 +9,9 @@ resource "aws_iam_role" "eks-role" {
     platform    = "terraform"
     environment = "development"
   }
-}
+ }
 
+/*
 resource "iam_role_policy" "eks-policy" {
   role = aws_iam_role.eks-role.id
 
@@ -23,4 +24,4 @@ resource "iam_role_policy" "eks-policy" {
     platform    = "terraform"
     environment = "development"
   }
-}
+ }*/
