@@ -3,5 +3,6 @@ module "aws_data" {
 }
 
 module "kms-key" {
-  source = "./modules/kms_key"
+  source    = "./modules/kms_key"
+  repo-name = var.repo-name
 }
