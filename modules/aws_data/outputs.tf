@@ -11,5 +11,5 @@ output "user-info" {
 }
 
 output "iam-user" {
-    value = data.aws_iam_users.users
+  value = data.aws_iam_users.users
 }
