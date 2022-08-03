@@ -13,3 +13,11 @@ output "caller-id" {
 output "iam-user" {
   value = module.aws_data.iam-user.names
 }
+
+output "kms-arn" {
+  value = module.kms-key.kms.arn
+}
+
+output "kms-id" {
+  value = module.kms-key.kms.key_id
+}
