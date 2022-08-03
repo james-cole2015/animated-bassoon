@@ -29,6 +29,10 @@ output "vpc-id" {
 output "iam-assume-role-arn" {
   value = module.iam-role.assume-role.arn
 }
+
+output "policy-id" {
+  value = module.iam-role.policy.id
+}
 /*
 forumla:
 value = module.main_tf_module_name.output_name_from_module_output.desired_value
