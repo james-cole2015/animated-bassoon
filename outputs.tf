@@ -21,3 +21,7 @@ output "kms-arn" {
 output "kms-id" {
   value = module.kms-key.kms.key_id
 }
+
+output "vpc-id" {
+  value = module.vpc.vpc_id
+}
