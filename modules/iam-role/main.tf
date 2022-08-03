@@ -11,7 +11,7 @@ resource "aws_iam_role" "eks-role" {
   }
  }
 
-resource "iam_role_policy" "eks-policy" {
+resource "aws_iam_role_policy" "eks-policy" {
   role = aws_iam_role.eks-role.id
 
   policy = file("./modules/iam-role/eks-policy.json")
