@@ -1,6 +1,7 @@
 resource "aws_kms_key" "kms-key" {
   description = "KMS Key for EKS"
   key_usage   = "ENCRYPT_DECRYPT"
+  is_enabled  = true
 
   tags = {
     platform    = "terraform"
