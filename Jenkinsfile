@@ -15,7 +15,7 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',credentialsId: "terraform-jenkins",accessKeyVariable: 'AWS_ACCESS_KEY_ID',secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh 'terraform init'
                     echo 'intializing terraform..'
-}
+                }
             }
         }
         stage('TERRAFORM PLAN') {
@@ -23,13 +23,15 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',credentialsId: "terraform-jenkins",accessKeyVariable: 'AWS_ACCESS_KEY_ID',secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     echo 'saving terraform plan'
                     sh 'terraform plan -out=plan.out'
-}
+                }
             }
         }
         stage('TERRAFORM APPLY') {
             steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',credentialsId: "terraform-jenkins",accessKeyVariable: 'AWS_ACCESS_KEY_ID',secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                 echo 'deploying changes in terraform..'
                 sh 'terraform apply --auto-approve -no-color'
+                }
             }
         }
     }   
