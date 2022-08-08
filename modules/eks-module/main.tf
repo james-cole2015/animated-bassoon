@@ -2,63 +2,85 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 18.0"
 
-  cluster_name    = "${var.repo-name}-cluster"
-  cluster_version = "1.22"
-
+  cluster_name                    = var.cluster_name
+  cluster_version                 = "1.17"
+  subnets                         = var.subnet_ids
+  cluster_create_timeout          = "1h"
   cluster_endpoint_private_access = true
-  cluster_endpoint_public_access  = true
 
-  cluster_addons = {
-    coredns = {
-      resolve_conflicts = "OVERWRITE"
-    }
-    kube-proxy = {}
-    vpc-cni = {
-      resolve_conflicts = "OVERWRITE"
+  vpc_id = var.vpc_id
+
+  worker_groups = [
+    {
+      name                          = "worker-group-1"
+      instance_type                 = var.instance_type
+      additional_userdata           = "echo foo bar"
+      asg_desired_capacity          = 1
+      additional_security_group_ids = [var.mgmt_1_sg]
+    },
+  ]
+  /*
+  worker_additional_security_group_ids = [var.mgmt_all_sg]
+  map_roles                            = var.map_roles
+  map_users                            = var.map_users
+  map_accounts                         = var.map_accounts
+*/
+}
+
+resource "kubernetes_deployment" "demo" {
+  metadata {
+    name = "terraform-example"
+    labels = {
+      test = "MyTestApp"
     }
   }
+  spec {
+    replicas = 2
 
-  cluster_encryption_config = [{
-    provider_key_arn = var.eks-key
-    resources        = ["secrets"]
-  }]
-
-  vpc_id     = var.vpc_id
-  subnet_ids = var.subnet_ids
-
-  self_managed_node_group_defaults = {
-    instance_type                          = "t3a.small"
-    update_launch_template_default_verison = true
-    iam_role_additional_policies = [
-      "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-    ]
-  }
-  self_managed_node_groups = {
-    one = {
-      name         = "mixed-1"
-      max_size     = 5
-      desired_size = 2
-
-      use_mixed_instances_policy = true
-      mixed_instances_policy = {
-        instances_distribution = {
-          on_demand_base_capacity                  = 0
-          on_demand_percentage_above_base_capacity = 10
-          spot_allocation_strategy                 = "capacity-optimized"
+    selector {
+      match_labels = {
+        test = "MyTestApp"
+      }
+    }
+    template {
+      metadata {
+        labels = {
+          test = "MyTestApp"
         }
+      }
+      spec {
+        container {
+          image = "nginx:1.7.8"
+          name  = "example"
 
-        override = [
-          {
-            instance_type     = "m5.large"
-            weighted_capacity = "1"
-          },
-          {
-            instance_type     = "m6i.large"
-            weighted_capacity = "2"
-          },
-        ]
+          resources {
+            limits {
+              cpu    = "0.5"
+              memory = "512Mi"
+            }
+            requests {
+              cpu    = "250m"
+              memory = "50Mi"
+            }
+          }
+        }
       }
     }
   }
+}
 
+resource "kubernetes_service" "example_service" {
+  metadata {
+    name = "terraform-example-service"
+  }
+  spec {
+    selector = {
+      test = "MyTestApp"
+    }
+    port {
+      port        = 80
+      target_port = 80
+    }
+    type = "LoadBalancer"
+  }
 }

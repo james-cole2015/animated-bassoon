@@ -8,14 +8,15 @@ module "kms-key" {
 }
 
 module "vpc" {
-  source    = "./modules/networking"
-  repo-name = var.repo-name
+  source       = "./modules/networking"
+  repo-name    = var.repo-name
+  cluster_name = var.cluster_name
 }
 
 module "eks-module" {
   source     = "./modules/eks-module"
-  repo-name  = var.repo-name
-  eks-key    = module.kms-key.kms.arn
+  #repo-name  = var.repo-name
+  #eks-key    = module.kms-key.kms.arn
   vpc_id     = module.vpc.vpc-info.vpc_id
   subnet_ids = module.vpc.vpc-info.public_subnets
 }
