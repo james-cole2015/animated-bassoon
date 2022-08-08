@@ -22,7 +22,7 @@ variable "repo-name" {
   type = string
 }
 
-variable "cluster-name" {
+variable "cluster_name" {
   type = string
 }
 
