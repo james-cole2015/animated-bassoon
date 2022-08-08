@@ -1,8 +1,9 @@
-/*
+
 variable "repo-name" {
   type = string
 }
 
+/*
 variable "eks-key" {
   type = string
 }
