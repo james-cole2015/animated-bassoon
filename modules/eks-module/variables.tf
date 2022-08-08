@@ -19,6 +19,15 @@ variable "cluster_name" {
   type = string
 }
 
+variable "instance_type" {
+  type    = string
+  default = "t2.small"
+}
+
+variable "mgmt_1_sg" {
+  type = string
+}
+
 variable "eks-clusters-cidr_blocks" {
   type    = list(any)
   default = ["10.100.0.0/16", "172.16.0.0/12"]
