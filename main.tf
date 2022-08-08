@@ -10,7 +10,7 @@ module "kms-key" {
 module "vpc" {
   source       = "./modules/networking"
   repo-name    = var.repo-name
-  cluster_name = var.cluster_name
+  #cluster_name = var.cluster_name
 }
 
 module "eks-module" {

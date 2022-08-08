@@ -21,10 +21,3 @@ variable "vpc_name" {
 variable "repo-name" {
   type = string
 }
-
-
-variable "eks-clusters-cidr_blocks" {
-  type    = list(any)
-  default = ["10.100.0.0/16", "172.16.0.0/12"]
-}
-
