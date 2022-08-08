@@ -33,6 +33,10 @@ variable "eks-clusters-cidr_blocks" {
   type    = list(any)
   default = ["10.100.0.0/16", "172.16.0.0/12"]
 }
+
+var.eks_iam_role {
+  type = string
+}
 /*
 variable "map_accounts" {
   type = list(string)

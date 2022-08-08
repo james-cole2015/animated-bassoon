@@ -1,87 +1,50 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "12.2.0"
-  #name = "${var.repo-name}-cluster"
 
-  cluster_name                    = var.cluster_name
-  cluster_version                 = "1.17"
-  subnets                         = var.subnet_ids
-  cluster_create_timeout          = "1h"
+  cluster_name    = "${var.repo-name}-cluster"
+  cluster_version = "1.22"
+
   cluster_endpoint_private_access = true
+  cluster_endpoint_public_access  = true
 
-  vpc_id = var.vpc_id
-
-  worker_groups = [
-    {
-      name                          = "${var.repo-name}-worker-group-1"
-      instance_type                 = var.instance_type
-      additional_userdata           = "echo foo bar"
-      asg_desired_capacity          = 1
-      additional_security_group_ids = [var.mgmt_1_sg]
-    },
-  ]
-  /*
-  worker_additional_security_group_ids = [var.mgmt_all_sg]
-  map_roles                            = var.map_roles
-  map_users                            = var.map_users
-  map_accounts                         = var.map_accounts
-*/
-}
-
-resource "kubernetes_deployment" "demo" {
-  metadata {
-    name = "terraform-example"
-    labels = {
-      test = "MyTestApp"
+  cluster_addons = {
+    coredns = {
+      resolve_conflicts = "OVERWRITE"
+    }
+    kube-proxy = {}
+    vpc-cni = {
+      resolve_conflicts = "OVERWRITE"
     }
   }
-  spec {
-    replicas = 2
+  create_iam_role = false
+  iam_role = var.eks_iam_role
 
-    selector {
-      match_labels = {
-        test = "MyTestApp"
-      }
+  vpc_id     = var.vpc_id
+  subnet_ids = [var.subnet_ids]
+
+  # EKS Managed Node Group(s)
+  eks_managed_node_group_defaults = {
+    disk_size      = 50
+    instance_types = ["m6i.large", "m5.large", "m5n.large", "m5zn.large"]
+  }
+
+  eks_managed_node_groups = {
+    blue = {
+      min_size = 1
+      max_size = 10
+      desired_size = 1
+
+      instance_types = [var.instance_type]
     }
-    template {
-      metadata {
-        labels = {
-          test = "MyTestApp"
-        }
-      }
-      spec {
-        container {
-          image = "nginx:1.7.8"
-          name  = "example"
+    green = {
+      min_size     = 1
+      max_size     = 10
+      desired_size = 1
 
-          resources {
-            limits {
-              cpu    = "0.5"
-              memory = "512Mi"
-            }
-            requests {
-              cpu    = "250m"
-              memory = "50Mi"
-            }
-          }
-        }
-      }
+      instance_types = ["t3.large"]
+      capacity_type  = "SPOT"
     }
   }
-}
-
-resource "kubernetes_service" "example_service" {
-  metadata {
-    name = "terraform-example-service"
-  }
-  spec {
-    selector = {
-      test = "MyTestApp"
-    }
-    port {
-      port        = 80
-      target_port = 80
-    }
-    type = "LoadBalancer"
-  }
-}
+  
+} ##End of Module
