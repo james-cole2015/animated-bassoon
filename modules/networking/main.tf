@@ -35,9 +35,9 @@ resource "aws_security_group" "worker_group_mgmt_one" {
     to_port   = 22
     protocol  = "tcp"
 
-    cidr_blocks = var.cidr_block
+    cidr_blocks = [var.cidr_block]
   }
-
+}
   resource "aws_security_group" "all_worker_mgmt" {
     name_prefix = "all_worker_mgmt"
     vpc_id      = module.vpc.vpc_id
@@ -50,4 +50,3 @@ resource "aws_security_group" "worker_group_mgmt_one" {
       cidr_blocks = var.eks-clusters-cidr_blocks
     }
   }
-}
