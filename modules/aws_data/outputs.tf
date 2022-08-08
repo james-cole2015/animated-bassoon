@@ -15,5 +15,13 @@ output "iam-user" {
 }
 
 output "availability_zones" {
-  value = data.aws_availability_zones.available.names
+  value = data.aws_availability_zones.available
+}
+
+output "eks-cluster" {
+  value = data.aws_eks_cluster
+}
+
+output "eks-cluster-auth" {
+  value = data.aws_eks_cluster_auth
 }
