@@ -1,3 +1,4 @@
+/*
 variable "repo-name" {
   type = string
 }
@@ -5,7 +6,7 @@ variable "repo-name" {
 variable "eks-key" {
   type = string
 }
-
+*/
 variable "vpc_id" {
   type = string
 }
@@ -14,7 +15,7 @@ variable "subnet_ids" {
   type = list(any)
 }
 
-variable "cluster-name" {
+variable "cluster_name" {
   type = string
 }
 
