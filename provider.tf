@@ -20,3 +20,11 @@ provider "aws" {
   shared_credentials_files = ["~/.aws/credentials"]
   shared_config_files      = ["~/.aws/config"]
 }
+
+provider "kubernetes" {
+  host                   = module.aws_data.aws_eks_cluster.cluster.endpoint
+  cluster_ca_certificate = base64decode(module.aws_data.eks_cluster.cluster.certificate_authority.0.data)
+  token                  = module.aws_data.aws_eks_cluster_auth.cluster.token
+  load_config_file       = false
+  version                = "~> 1.11"
+}
