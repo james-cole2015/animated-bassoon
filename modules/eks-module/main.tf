@@ -18,7 +18,7 @@ module "eks" {
     }
   }
   create_iam_role = false
-  iam_role = var.eks_iam_role
+  iam_role_arn = var.eks_iam_role
 
   vpc_id     = var.vpc_id
   subnet_ids = [var.subnet_ids]
