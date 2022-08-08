@@ -34,6 +34,10 @@ output "iam-assume-role-arn" {
 output "policy-id" {
   value = module.iam-role.policy.id
 }
+
+output "azs" {
+  value = module.vpc.availability_zones.names
+}
 /*
 forumla:
 value = module.main_tf_module_name.output_name_from_module_output.desired_value
