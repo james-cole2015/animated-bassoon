@@ -21,13 +21,6 @@ variable "instance_type" {
   default = "t2.small"
 }
 
-
-
-variable "eks-clusters-cidr_blocks" {
-  type    = list(any)
-  default = ["10.100.0.0/16", "172.16.0.0/12"]
-}
-
 variable "eks_iam_role" {
   type = string
 }
