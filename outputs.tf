@@ -36,7 +36,7 @@ output "policy-id" {
 }
 
 output "azs" {
-  value = module.aws_data.aws_availability_zones.available.names
+  value = module.aws_data.availability_zones.names
 }
 /*
 forumla:
