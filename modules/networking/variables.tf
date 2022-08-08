@@ -22,9 +22,6 @@ variable "repo-name" {
   type = string
 }
 
-variable "cluster_name" {
-  type = string
-}
 
 variable "eks-clusters-cidr_blocks" {
   type    = list(any)
