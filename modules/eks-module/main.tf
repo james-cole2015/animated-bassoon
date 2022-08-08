@@ -1,7 +1,7 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "12.2.0"
-  name = "${var.repo-name}-cluster"
+  #name = "${var.repo-name}-cluster"
 
   cluster_name                    = var.cluster_name
   cluster_version                 = "1.17"
@@ -13,7 +13,7 @@ module "eks" {
 
   worker_groups = [
     {
-      name                          = "worker-group-1"
+      name                          = "${var.repo-name}-worker-group-1"
       instance_type                 = var.instance_type
       additional_userdata           = "echo foo bar"
       asg_desired_capacity          = 1
