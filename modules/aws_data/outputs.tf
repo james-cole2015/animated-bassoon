@@ -19,9 +19,9 @@ output "availability_zones" {
 }
 
 output "eks-cluster" {
-  value = data.aws_eks_cluster
+  value = data.aws_eks_cluster.cluster
 }
 
 output "eks-cluster-auth" {
-  value = data.aws_eks_cluster_auth
+  value = data.aws_eks_cluster_auth.cluster
 }
