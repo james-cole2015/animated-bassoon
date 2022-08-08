@@ -19,7 +19,7 @@ module "eks-module" {
   #eks-key     = module.kms-key.kms.arn
   vpc_id       = module.vpc.vpc-info.vpc_id
   subnet_ids   = module.vpc.vpc-info.public_subnets
-  eks_iam_role = module.iam-role.eks-iam-role.arn
+  #eks_iam_role = module.iam-role.eks-iam-role.arn
 }
 
 module "iam-role" {

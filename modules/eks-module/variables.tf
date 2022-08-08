@@ -20,11 +20,11 @@ variable "instance_type" {
   type    = string
   default = "t2.small"
 }
-
+/*
 variable "eks_iam_role" {
   type = string
 }
-/*
+
 variable "map_accounts" {
   type = list(string)
   default = [
