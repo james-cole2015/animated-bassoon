@@ -48,4 +48,16 @@ module "eks" {
     }
   }
   
+  aws_auth_users = [
+    {
+      userarn  = "arn:aws:iam::959867141488:user/MatthewDavis"
+      username = "MatthewDavis"
+      groups   = ["system:masters"]
+    }
+  ]
+
+  aws_auth_accounts = [
+    "959867141488"
+  ]
+
 } ##End of Module
