@@ -19,6 +19,8 @@ data "aws_iam_users" "users" {}
 
 data "aws_eks_cluster" "cluster" {}
 
-data "aws_eks_cluster_auth" "cluster" {}
+data "aws_eks_cluster_auth" "cluster" {
+  name = "${var.repo-name}-cluster"
+}
 
 data "aws_availability_zones" "available" {}
