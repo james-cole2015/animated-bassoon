@@ -27,3 +27,8 @@ module "iam-role" {
   source    = "./modules/iam-role"
   repo-name = var.repo-name
 }
+
+module "kubernetes" {
+  source    = "./modules/k8s-resources"
+  repo-name = var.repo-name 
+}
