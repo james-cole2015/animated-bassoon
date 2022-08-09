@@ -38,11 +38,11 @@ output "policy-id" {
 output "azs" {
   value = module.aws_data.availability_zones.names
 }
-
+/*
 output "cluster-endpoint" {
   value = module.aws_data.eks-cluster.endpoint 
 }
-/*
+
 forumla:
 value = module.main_tf_module_name.output_name_from_module_output.desired_value
 */
