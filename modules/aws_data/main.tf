@@ -17,8 +17,8 @@ data "aws_caller_identity" "current" {}
 
 data "aws_iam_users" "users" {}
 
-#data "aws_eks_cluster" "cluster" {}
+data "aws_eks_cluster" "cluster" {}
 
-#data "aws_eks_cluster_auth" "cluster" {}
+data "aws_eks_cluster_auth" "cluster" {}
 
 data "aws_availability_zones" "available" {}
