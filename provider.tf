@@ -24,10 +24,10 @@ provider "aws" {
   shared_config_files      = ["~/.aws/config"]
 }
 
-/*
+
 provider "kubernetes" {
-  host                   = module.aws_data.eks-cluster.cluster.endpoint
-  cluster_ca_certificate = base64decode(module.aws_data.eks-cluster.cluster.certificate_authority.0.data)
-  token                  = module.aws_data.eks-cluster-auth.cluster.token
+  host                   = module.aws_data.eks-cluster.endpoint
+  cluster_ca_certificate = base64decode(module.aws_data.eks-cluster.certificate_authority.0.data)
+  token                  = module.aws_data.eks-cluster-auth.token
   #load_config_file       = false
-}*/
+}
