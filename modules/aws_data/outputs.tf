@@ -11,5 +11,17 @@ output "user-info" {
 }
 
 output "iam-user" {
-    value = data.aws_iam_users.users
+  value = data.aws_iam_users.users
+}
+
+output "availability_zones" {
+  value = data.aws_availability_zones.available
+}
+
+output "eks-cluster" {
+  value = data.aws_eks_cluster.cluster
+}
+
+output "eks-cluster-auth" {
+  value = data.aws_eks_cluster_auth.cluster
 }

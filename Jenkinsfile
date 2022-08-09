@@ -7,7 +7,7 @@ pipeline {
         stage('GIT CHECKOUT') {
             steps {
                 echo 'checking out git repo..'
-                git branch: 'main', url: 'https://github.com/james-cole2015/animated-bassoon.git'
+                git branch: 'development', url: 'https://github.com/james-cole2015/animated-bassoon.git'
             }
         } 
         stage('TERRAFORM INIT') {
