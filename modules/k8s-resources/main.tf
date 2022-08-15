@@ -1,6 +1,6 @@
 provider "kubernetes" {
-  host                   = module.eks-module.eks-info.cluster_endpoint
-  cluster_ca_certificate = base64decode(module.eks-module.eks-info.cluster_certificate_authority_data)
+  host                   = var.host
+  cluster_ca_certificate = base64decode(var.ca_cert)
 }
 
 resource "kubernetes_deployment" "demo" {
