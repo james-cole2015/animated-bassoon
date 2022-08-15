@@ -38,6 +38,10 @@ output "policy-id" {
 output "azs" {
   value = module.aws_data.availability_zones.names
 }
+
+output "cluster-endpoint" {
+  value = module.eks-module.eks-info.cluster_endpoint
+}
 /*
 output "cluster-endpoint" {
   value = module.aws_data.eks-cluster.endpoint 
