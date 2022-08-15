@@ -28,7 +28,9 @@ module "iam-role" {
   repo-name = var.repo-name
 }
 
-#module "kubernetes" {
-#  source    = "./modules/k8s-resources"
-#  repo-name = var.repo-name 
-#}
+module "kubernetes" {
+  source           = "./modules/k8s-resources"
+  repo-name        = var.repo-name 
+  host             = module.eks-module.eks-info.cluster_endpoint
+  ca_cert          = module.eks-module.eks-info.cluster_certificate_authority_data
+}
