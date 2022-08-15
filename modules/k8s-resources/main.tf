@@ -1,3 +1,8 @@
+provider "kubernetes" {
+  host                   = module.eks-module.eks-info.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks-module.eks-info.cluster_certificate_authority_data)
+}
+
 resource "kubernetes_deployment" "demo" {
   metadata {
     name = "${var.repo-name}-example"
