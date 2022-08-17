@@ -42,6 +42,10 @@ output "azs" {
 output "cluster-endpoint" {
   value = module.eks-module.eks-info.cluster_endpoint
 }
+
+output "cluster-name" {
+  value = module.eks-module.eks-info.cluster_id
+}
 /*
 output "cluster-endpoint" {
   value = module.aws_data.eks-cluster.endpoint 
