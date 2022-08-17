@@ -53,11 +53,18 @@ module "eks" {
       userarn  = "arn:aws:iam::959867141488:user/MatthewDavis"
       username = "MatthewDavis"
       groups   = ["system:masters"]
+    },
+    {
+      userarn  = "arn:aws:iam::835867269469:user/AveryClark"
+      username = "AveryClark"
+      groups   = ["system:masters"]
     }
   ]
 
+
   aws_auth_accounts = [
-    "959867141488"
+    "959867141488",
+    "835867269469"
   ]
 
 } ##End of Module

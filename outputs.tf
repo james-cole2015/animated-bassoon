@@ -40,9 +40,17 @@ output "azs" {
 }
 
 output "cluster-endpoint" {
-  value = module.aws_data.eks-cluster.endpoint 
+  value = module.eks-module.eks-info.cluster_endpoint
+}
+
+output "cluster-name" {
+  value = module.eks-module.eks-info.cluster_id
 }
 /*
+output "cluster-endpoint" {
+  value = module.aws_data.eks-cluster.endpoint 
+}
+
 forumla:
 value = module.main_tf_module_name.output_name_from_module_output.desired_value
 */
